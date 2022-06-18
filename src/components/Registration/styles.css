@@ -1,0 +1,27 @@
+.headerRegistration {
+  width: 90vw;
+  max-width: 369px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px auto 20px;
+}
+
+header > button {
+  background: #212529;
+  border-radius: 4px;
+  border: none;
+  height: 40px;
+  width: 60px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  text-align: center;
+  color: #f8f9fa;
+}
+
+.moduleOptions {
+    width: 84vw;
+    max-width: 329px;
+}
