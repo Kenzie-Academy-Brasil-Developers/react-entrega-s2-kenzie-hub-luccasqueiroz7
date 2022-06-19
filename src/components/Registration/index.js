@@ -51,8 +51,6 @@ function Registration() {
 
   return (
     <>
-      {/* BOTAR OS ERROS NA FRENTE DO NOME DOS LABELS */}
-      {/* VOLTAR É PRA VOLTAR PRO LOGIN, ENTÂO PAGINA INICIAL É O LOGIN */}
       <header className="headerRegistration">
         Kenzie Hub <button onClick={() => history.push("/")}>Voltar</button>
       </header>
@@ -125,7 +123,7 @@ function Registration() {
         <label>
           <p>Selecionar módulo</p>
           <select className="moduleOptions" {...register("course_module")}>
-            {/* TALVEZ PRECISE MUDAR OS VALUES */}
+           
             <option value="Primeiro módulo (Introdução ao Frontend)">
               Primeiro Módulo
             </option>

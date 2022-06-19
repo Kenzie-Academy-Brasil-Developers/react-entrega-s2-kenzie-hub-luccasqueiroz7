@@ -5,27 +5,18 @@ import * as yup from "yup";
 import api from "../../services/api";
 import "./styles.css";
 import { useHistory } from "react-router-dom";
-import divider from "../../assets/Rectangle 34.png"
-
+import divider from "../../assets/Rectangle 34.png";
 
 function Dashboard() {
-
-  const history = useHistory()
-
+  const history = useHistory();
   const [createTech, setCreateTech] = useState(false);
-
-  /* USAR UM STATE E FAZER UM EFFECT PRA ATUALIZAR O VALOR DO USUARIO */
-
   const user = JSON.parse(localStorage.getItem("@kenziehub:user"));
-  /* const actualUser = api.get(`users/${user.id}`).then(res => console.log(res.data)) */
-
+  const token = localStorage.getItem("@kenziehub:token");
   const [actualTech, setActualTech] = useState([]);
 
   useEffect(() => {
     api.get(`users/${user.id}`).then((res) => setActualTech(res.data.techs));
   }, [actualTech]);
-
-  const token = localStorage.getItem("@kenziehub:token");
 
   const formSchema = yup.object().shape({
     title: yup.string().required("Nome obrigatório"),
@@ -40,7 +31,6 @@ function Dashboard() {
   });
 
   const onSubmitFunction = (data) => {
-    /* console.log(data); */
     api
       .post("/users/techs", data, {
         headers: {
@@ -52,29 +42,26 @@ function Dashboard() {
 
     setCreateTech(false);
   };
-  /* LIMPAR LOCALSTORAGE E BOTAR PRA FALSE QUANDO CLICKAR EM SAIR */
 
   return (
     <div className="dashboard">
       <header>
-        Kenzie Hub <button onClick={() => history.push('/')}>Sair</button>
+        Kenzie Hub <button onClick={() => history.push("/")}>Sair</button>
       </header>
 
-      <img src={divider} alt="----" className="divider"/>
-      {/* Divisorias */}
+      <img src={divider} alt="----" className="divider" />
+
       <h2>
         Olá, {user.name} <span>{user.course_module}</span>
       </h2>
-      
-      <img src={divider} alt="----" className="divider"/>
 
-      {/* Divisorias */}
+      <img src={divider} alt="----" className="divider" />
+
       <div className="techsAdd">
         <p>
           Tecnologias <button onClick={() => setCreateTech(true)}>+</button>
         </p>
-        {/* Trocar o maizinho */}
-        {/* Botão de adicionar tecnologia */}
+
         {createTech && (
           <div className="createTech">
             <h2>
@@ -101,17 +88,14 @@ function Dashboard() {
           </div>
         )}
         <div className="techs">
-          {/* {console.log(`Actual tech = ${actualTech}`)} */}
           {actualTech?.map((tech) => (
-            <div>
+            <div className="tech">
               <h3>{tech.title}</h3>
               <div className="detailsTech">
                 <p>{tech.status}</p>
-                {/* Colocar o lixinho aqui */}
+
                 <button
                   onClick={() => {
-                    /* PENSAR NUM BOTÃO DE CONFIRMAÇÃO para excluir ou não */
-                    /* console.log(tech.id); */
                     api
                       .delete(`/users/techs/${tech.id}`, {
                         headers: {
@@ -120,15 +104,12 @@ function Dashboard() {
                       })
                       .catch((err) => console.log(err));
                   }}
-                >
-                  
-                </button>
+                ></button>
               </div>
             </div>
           ))}
         </div>
       </div>
-      {/* Aqui ficam as techs, ainda não existentes */}
     </div>
   );
 }

@@ -4,26 +4,21 @@ import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage";
 
-
 function Routes() {
-  
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-
-    const token = localStorage.getItem("@kenziehub:token")
-    console.log(token);
+    const token = localStorage.getItem("@kenziehub:token");
 
     if (token) {
-      setAuthenticated(true)
+      setAuthenticated(true);
     }
-
-  },[authenticated])
+  }, [authenticated]);
 
   return (
     <Switch>
       <Route exact path="/">
-        <LoginPage setAuthenticated={setAuthenticated}/>
+        <LoginPage setAuthenticated={setAuthenticated} />
       </Route>
 
       <Route exact path="/cadastro">
@@ -31,7 +26,7 @@ function Routes() {
       </Route>
 
       <Route exact path="/dashboard">
-        <DashboardPage authenticated={authenticated}/>
+        <DashboardPage authenticated={authenticated} />
       </Route>
     </Switch>
   );
